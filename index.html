@@ -13,13 +13,23 @@
 	<body class="text-center">
 		<main class="form-qrrechnung">
 			<img src="logo.png" alt="Logo" style="width: 570px;" class="mb-5">
+			<div class="card bg-light mb-4">
+				<div class="card-header">
+					<h5 class="card-title">QR-Rechnung für Heimvermietungen</h5>
+				</div>
+				<div class="card-body">
+					<p class="card-text">Mit diesem Tool kann der Zahlungsteil einer QR-Rechnung für eine Heimvermietung erstellt werden. Das SVG kann in ein Dokument eingefügt werden 
+					(<a href="beispiel_rechnung.docx" target="_blank" class="text-muted">Beispiel</a>). Soll die Rechnung ausgedruckt werden, muss perforiertes Papier verwendet werden 
+					(<a href="https://www.galaxus.ch/de/s12/product/noname-rechnungsformulare-mit-qr-code-500x-formular-13132215?supplier=406802" target="_blank" class="text-muted">Beispiel</a>).</p>
+				</div>
+			</div>
 			<form>
 				<div class="form-floating mb-2">
 					<select class="form-select" id="format">
 						<option selected value="no">Papier-Rechnung (Ausdruck auf perforiertes Papier)</option>
 						<option value="yes">PDF-Rechung (elektronischer Versand)</option>
 					</select>
-					<label for="heim">Format</label>
+					<label for="format">Format</label>
 				</div>
 				<div class="form-floating mb-2">
 					<select class="form-select" id="heim">
@@ -38,7 +48,7 @@
 					<input class="form-control" type="text" id="datum" placeholder="Mietdatum">
 					<label for="datum">Mietdatum</label>
 				</div>
-				<div class="form-floating mb-4">
+				<div class="form-floating mb-3">
 					<input class="form-control" type="text" id="betrag" placeholder="Mietbetrag">
 					<label for="betrag">Mietbetrag</label>
 				</div>
@@ -51,24 +61,6 @@
 				<span class="text-muted">2021 <a href="https://schwyzerstaern.ch/users/flips" target="_blank" class="text-reset">fLIPS</a></span>
 			</div>
 		</footer>
+		<script src="script.js"></script>
 	</body>
-	<script language="javascript" type="text/javascript">
-		function processFormData(downloadsvg){
-			let heim = document.getElementById('heim').value;
-			let mieter = document.getElementById('mieter').value;
-			let datum = document.getElementById('datum').value;
-			let betrag = document.getElementById('betrag').value;
-			let format = document.getElementById('format').value;
-			let url = 'https://qr-rechnung.net/#/b,de,SPC,0200,1,CH1409000000300055426,S,Verein%20Pfadfinderheime%20Schwyzerst%C3%A4rn,,,3000,Bern,CH,,,,,,,,' 
-					+ betrag.replace(/\s/g, '') + ',CHF,,,,,,,,NON,,Heim%20'
-					+ encodeURIComponent(heim) + '%20%2F%20'
-					+ encodeURIComponent(mieter) + '%20%2F%20'
-					+ encodeURIComponent(datum) + ',EPD,?cutlines='
-					+ format;
-			if(downloadsvg){
-				url += '&op=downloadsvg';
-			}
-			window.open(url,'_blank');
-		}
-	</script>
 </html>
